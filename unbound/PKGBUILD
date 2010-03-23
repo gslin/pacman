@@ -9,13 +9,13 @@ backup=('etc/conf.d/unbound')
 url="http://www.unbound.net/"
 license=('custom')
 depends=('bash' 'libevent' 'openssl')
-source=("http://www.unbound.net/downloads/${pkgname}-${pkgver}.tar.gz" 'unbound' 'unbound.confd')
+source=("http://www.unbound.net/downloads/${pkgname}-${pkgver}.tar.gz"
+	'unbound'
+	'unbound.confd')
 md5sums=('2dffdd42f94b8238447a41835439d129'
 	 'b0c60ea71694c207857458e4fbe56470'
 	 '516f05da4a93f10807c13a96db945272')
-sha256sums=('7c212228234547af776d51067a04a8c32f572e5db493e16a269370da4413070f'
-	    '3879293530a58781a5230e59167e20ddf3354041f8110ac9379a53e91f302793'
-	    'e6627b709266ef1ff97c30e65b18d30ec55b0faf095cd471a636efb8717185a8')
+
 build() {
   cd ${srcdir}/${pkgname}-${pkgver}
   ./configure --prefix=/usr --sysconfdir=/etc --with-pthread --with-libevent
