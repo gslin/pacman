@@ -15,6 +15,7 @@ source=("http://www.unbound.net/downloads/${pkgname}-${pkgver}.tar.gz"
 md5sums=('2dffdd42f94b8238447a41835439d129'
 	 'b0c60ea71694c207857458e4fbe56470'
 	 '516f05da4a93f10807c13a96db945272')
+options=(!libtool)
 
 build() {
   cd ${srcdir}/${pkgname}-${pkgver}
