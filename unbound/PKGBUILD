@@ -1,0 +1,29 @@
+# Maintainer: Gea-Suan Lin <gslin at gslin dot org>
+
+pkgname=unbound
+pkgver=1.4.3
+pkgrel=1
+pkgdesc="A validating, recursive, and caching DNS resolver."
+arch=('i686' 'x86_64')
+url="http://www.unbound.net/"
+license=('custom')
+depends=('libevent')
+source=(http://www.unbound.net/downloads/$pkgname-$pkgver.tar.gz)
+md5sums=('2dffdd42f94b8238447a41835439d129')
+
+build() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+  ./configure --prefix=/usr --sysconfdir=/etc --with-pthread --with-libevent
+  make || return 1
+  make DESTDIR=${pkgdir} install || return 1
+}
+
+package() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+
+  install -Dm644 LICENSE ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
+  install -Dm755 ${startdir}/unbound ${pkgdir}/etc/rc.d/unbound
+  install -Dm644 ${startdir}/unbound.confd ${pkgdir}/etc/conf.d/unbound
+}
+
+# vim: set ft=sh sw=2 ts=2 et:
