@@ -1,0 +1,29 @@
+# Contributor: Gea-Suan Lin <gslin at gslin.org>
+pkgname=python-lazyboy
+pkgver=0.7.4
+pkgrel=1
+pkgdesc="Python library for accessing Cassandra"
+arch=(any)
+url="http://github.com/digg/lazyboy"
+license=("custom")
+depends=('python')
+makedepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=(!emptydirs)
+install=
+source=("http://cloud.github.com/downloads/digg/lazyboy/Lazyboy-${pkgver}.tar.gz"
+	"LICENSE")
+md5sums=('f0a32e473c2afa1ffb6928e84f89345c'
+         '462d26c1f65c809be4a61defc71c10e9')
+sha256sums=('a7031e490b00e63d94fb7044583779ac0e7a413bedba1ccbfdf2e88fcefeab88'
+            '6d99e9c71f8dc1fd12332e6dc741e90d5c12a3670b4ad0a07b26b58e312caf38')
+
+build() {
+  cd $srcdir/Lazyboy-$pkgver
+  python setup.py install --root=$pkgdir/ --optimize=1 || return 1
+
+  install -D -m644 $startdir/LICENSE $pkgdir/usr/share/licenses/$pkgname/LICENSE
+}
